@@ -1,4 +1,3 @@
- the official lightweight Node.js image
 FROM node:18-alpine
 
 # Set the working directory
