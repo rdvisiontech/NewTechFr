@@ -25,20 +25,29 @@ function ViewApplication() {
     // Function to convert Base64 back to PDF
     const handleBase64ToPDF = (base64String) => {
         if (base64String) {
-            const byteCharacters = atob(base64String);
-            const byteNumbers = new Array(byteCharacters.length);
-            for (let i = 0; i < byteCharacters.length; i++) {
-                byteNumbers[i] = byteCharacters.charCodeAt(i);
+            try {
+                const byteCharacters = atob(base64String);
+                const byteNumbers = new Array(byteCharacters.length);
+                for (let i = 0; i < byteCharacters.length; i++) {
+                    byteNumbers[i] = byteCharacters.charCodeAt(i);
+                }
+                const byteArray = new Uint8Array(byteNumbers);
+                const blob = new Blob([byteArray], { type: 'application/pdf' });
+                const url = URL.createObjectURL(blob);
+    
+                setPdfUrl(url);
+    
+                // Cleanup function to revoke URL when no longer needed
+                return () => URL.revokeObjectURL(url);
+    
+            } catch (error) {
+                alert('Invalid Base64 string.');
             }
-            const byteArray = new Uint8Array(byteNumbers);
-            const blob = new Blob([byteArray], { type: 'application/pdf' });
-            const url = URL.createObjectURL(blob);
-            setPdfUrl(url);
         } else {
             alert('No Base64 string available to convert.');
         }
     };
-
+    
     // Function to convert Base64 back to Video
     const handleBase64ToVideo = async (videoBase64) => {
         if (videoBase64) {
