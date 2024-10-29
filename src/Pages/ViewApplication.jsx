@@ -117,12 +117,12 @@ function ViewApplication() {
                     "Authorization": `Bearer ${JSON.parse(localStorage.getItem("loginDetails")).token}`
                 }
             });
-            toast.info(response.data);
+            toast.success("Application Rejected")
         } catch (error) {
             toast.error("Error rejecting application");
-        } finally {
-            setLoadingRejection(false);
         }
+            setLoadingRejection(false);
+       
     };
     const handleVideo = () => {
         handleBase64ToVideo(application.introVideo)
