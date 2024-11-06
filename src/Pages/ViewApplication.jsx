@@ -2,11 +2,10 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ApplicationAccept from '../Components/ApplicationAccept';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from '../Authorisation/AuthContext';
 // import closeIcon from '../Assests/closeButton.jpg';
 import closeIcon from '../assets/Images/closeButton.jpg'
+import Swal from 'sweetalert2';
 
 
 function ViewApplication() {
@@ -117,9 +116,10 @@ function ViewApplication() {
                     "Authorization": `Bearer ${JSON.parse(localStorage.getItem("loginDetails")).token}`
                 }
             });
-            toast.success("Application Rejected")
+      
+            Swal.fire("Application Rejected");
         } catch (error) {
-            toast.error("Error rejecting application");
+           Swal.fire("Error rejecting application");
         }
             setLoadingRejection(false);
        
@@ -313,7 +313,6 @@ function ViewApplication() {
                 )}
             </dialog>
 
-            <ToastContainer />
         </div>
     );
 }

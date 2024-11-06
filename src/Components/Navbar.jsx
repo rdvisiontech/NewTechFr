@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import HrLoginPage from '../Authorisation/HrLoginPage';
 import { useAuth } from '../Authorisation/AuthContext';
@@ -21,6 +21,21 @@ function Navbar() {
         navigate("/");
     };
 
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const loginTime = localStorage.getItem('loginTime');
+            if (loginTime) {
+                const currentTime = new Date().getTime();
+                const timeDiff = currentTime - loginTime;
+                if (timeDiff >= 10 * 60 * 60 * 1000) { // 10000 ms = 10 seconds
+                    logOut();
+                    navigate("/");
+                    clearInterval(interval); // Stop checking after logging out
+                }
+            }
+        }, 1000);
+    })
     const closeDialogBox = () => {
         document.getElementById("signInFormHr").close();
     };
@@ -34,7 +49,7 @@ function Navbar() {
     const toggleDropdown = () => {
         setDropdownOpen(!dropdownOpen);
     };
-    const offDropdown=()=>{
+    const offDropdown = () => {
         setDropdownOpen(false)
     }
     return (
@@ -85,7 +100,7 @@ function Navbar() {
                     <div className="md:flex items-center hidden space-x-8"> {/* Increased space between links */}
                         <nav className="flex space-x-6"> {/* Added space between nav items */}
                             <NavLink
-                             onClick={offDropdown}
+                                onClick={offDropdown}
                                 to="/"
                                 className={({ isActive }) =>
                                     `mx-5 my-1 p-2 rounded-lg transition-all duration-300 ease-in-out hover:bg-[#0d4d9d] hover:shadow-lg hover:scale-105 ${isActive
@@ -107,7 +122,7 @@ function Navbar() {
                                     {dropdownOpen && (
                                         <div className="absolute mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg z-50">
                                             <NavLink
-                                            onClick={offDropdown}
+                                                onClick={offDropdown}
                                                 to="/post"
                                                 className={({ isActive }) =>
                                                     `text-blue-600 block px-4 py-2 rounded-t-lg transition-all duration-300 ease-in-out hover:bg-[#0d4d9d] hover:text-white ${isActive ? 'bg-[#0d4d9d] text-white' : ''}`
@@ -116,7 +131,7 @@ function Navbar() {
                                                 Post New Job
                                             </NavLink>
                                             <NavLink
-                                            onClick={offDropdown}
+                                                onClick={offDropdown}
                                                 to="/aplicantList"
                                                 className={({ isActive }) =>
                                                     `text-blue-600 block px-4 py-2 transition-all duration-300 ease-in-out hover:bg-[#0d4d9d] hover:text-white ${isActive ? 'bg-[#0d4d9d] text-white' : ''}`
@@ -125,7 +140,7 @@ function Navbar() {
                                                 Received Applications
                                             </NavLink>
                                             <NavLink
-                                            onClick={offDropdown}
+                                                onClick={offDropdown}
                                                 to="/postedJobs"
                                                 className={({ isActive }) =>
                                                     `text-blue-600 block px-4 py-2 transition-all duration-300 ease-in-out hover:bg-[#0d4d9d] hover:text-white ${isActive ? 'bg-[#0d4d9d] text-white' : ''}`
@@ -134,7 +149,7 @@ function Navbar() {
                                                 Current Openings
                                             </NavLink>
                                             <NavLink
-                                            onClick={offDropdown}
+                                                onClick={offDropdown}
                                                 to="/quiz"
                                                 className={({ isActive }) =>
                                                     `text-blue-600 block px-4 py-2 transition-all duration-300 ease-in-out hover:bg-[#0d4d9d] hover:text-white ${isActive ? 'bg-[#0d4d9d] text-white' : ''}`
@@ -143,7 +158,7 @@ function Navbar() {
                                                 Quiz
                                             </NavLink>
                                             <NavLink
-                                            onClick={offDropdown}
+                                                onClick={offDropdown}
                                                 to="/score"
                                                 className={({ isActive }) =>
                                                     `text-blue-600 block px-4 py-2 rounded-b-lg transition-all duration-300 ease-in-out hover:bg-[#0d4d9d] hover:text-white ${isActive ? 'bg-[#0d4d9d] text-white' : ''}`
@@ -202,7 +217,7 @@ function Navbar() {
                                 }
                             >
                                 Careers
-                            </NavLink> 
+                            </NavLink>
 
                         </nav>
                         {localStorage.getItem("loginDetails") ? (
@@ -305,7 +320,7 @@ function Navbar() {
             <dialog id="signInFormHr" className=' rounded'>
                 <div className="p-8 relative">
                     <div className="absolute top-2 right-2 cursor-pointer" onClick={closeDialogBox}>
-                        <img src={closeIcon} className="h-5 w-5" alt="close icon" /> 
+                        <img src={closeIcon} className="h-5 w-5" alt="close icon" />
                     </div>
                     <HrLoginPage closeFunction={closeDialogBox} />
                 </div>
