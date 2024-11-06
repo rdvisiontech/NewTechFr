@@ -71,24 +71,30 @@ function ApplicantsScore() {
                 <table className="min-w-full bg-white border rounded-lg shadow-md">
                     <thead>
                         <tr className="bg-[#1462dd] text-white">
-                            <th className="py-3 px-4 border-b">Name</th>
-                            <th className="py-3 px-4 border-b">Email</th>
-                            <th className="py-3 px-4 border-b">Quiz Date</th>
-                            <th className="py-3 px-4 border-b">Quiz Start Time</th>
-                            <th className="py-3 px-4 border-b">Quiz End Time</th>
-                            <th className="py-3 px-4 border-b">Score</th>
+                            <th className="py-3 px-4 border-b text-center">Name</th>
+                            <th className="py-3 px-4 border-b text-center">Email</th>
+                            <th className="py-3 px-4 border-b text-center">Role</th>
+                            <th className="py-3 px-4 border-b text-center">Quiz Date</th>
+                            <th className="py-3 px-4 border-b text-center">Quiz Start Time</th>
+                            <th className="py-3 px-4 border-b text-center">Quiz End Time</th>
+                            <th className="py-3 px-4 border-b text-center">Toteal Attempted</th>
+                            <th className="py-3 px-4 border-b text-center">Total Correct</th>
+                            <th className="py-3 px-4 border-b text-center">Score</th>
                         </tr>
                     </thead>
                     <tbody>
                         {filteredApplicants.map(applicant => (
                             <tr key={applicant.id} className='bg-blue-50 hover:bg-blue-100'>
-                                <td className="py-3 px-4 border-b">{applicant.userName}</td>
-                                <td className="py-3 px-4 border-b">{applicant.email}</td>
-                                <td className="py-3 px-4 border-b">{applicant.quizDate}</td>
-                                <td className="py-3 px-4 border-b">{applicant.quizStartTime}</td>
-                                <td className="py-3 px-4 border-b">{applicant.quizEndTime}</td>
+                                <td className="py-3 px-4 border-b text-center">{applicant.userName}</td>
+                                <td className="py-3 px-4 border-b text-center">{applicant.email}</td>
+                                <td className="py-3 px-4 border-b text-center">{applicant.roleName?applicant.roleName:"NA"}</td>
+                                <td className="py-3 px-4 border-b text-center">{applicant.quizDate}</td>
+                                <td className="py-3 px-4 border-b text-center">{applicant.quizStartTime}</td>
+                                <td className="py-3 px-4 border-b text-center">{applicant.quizEndTime}</td>
+                                <td className="py-3 px-4 border-b text-center">{applicant.totalAttempted}</td>
+                                <td className="py-3 px-4 border-b text-center">{ applicant.correctAnswers && applicant.correctAnswers}</td>
                                 <td
-                                    className={`py-3 px-4 border-b ${
+                                    className={`py-3 px-4 border-b text-center ${
                                         applicant.scoreOfCandidate < 20 ? 'text-red-600' : ''
                                     }`}
                                 >

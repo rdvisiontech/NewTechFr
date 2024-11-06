@@ -89,10 +89,10 @@ function ApplyJob() {
         if (type === "file") {
             const file = files[0];
             if (file) {
-                const maxSizeInBytes = 100 * 1024 * 1024; // 100MB in bytes
+                const maxSizeInBytes = 60 * 1024 * 1024; // 100MB in bytes
     
                 if (file.size > maxSizeInBytes) {
-                    toast.error("File size exceeds 100MB. Please choose a smaller file.");
+                    toast.error("File size exceeds 50MB. Please choose a smaller file.");
                     event.target.value = null; // Clear the input field
                     return;
                 }
@@ -251,8 +251,11 @@ function ApplyJob() {
                                 <label htmlFor={key} className={`text-sm font-medium text-gray-600 ${key !== "experienceType" && key !== "experienceInYear" && key !== "about" ? 'after:content-["*"] after:text-red-600 after:ml-1' : ''}`}>
                                     {label}
                                 </label>
-                                <input
+                              <div className='flex  items-center'>
+                              {key === "email" && isEmailVerified && applicationDetails.email &&<span className='mr-1'>✅</span>}
+                              <input
                                     onChange={handleOnChange}
+                                    disabled={key === "email" && isEmailVerified }
                                     type= "text"
                                     id={key}
                                     name={key}
@@ -263,6 +266,7 @@ function ApplyJob() {
                                     className="w-full bg-gray-100 border border-gray-300 rounded-lg focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 text-gray-700 py-2 px-3"
                                     required={key !== "resume" && key !== "introVideo" && key !== "portfolio" && key !== "about"}
                                 />
+                              </div>
                                 {key === "email" && !isEmailVerified && applicationDetails.email && (
                                     <div className='flex justify-end pr-4'>
                                         <button
@@ -287,7 +291,7 @@ function ApplyJob() {
                             />
                         </div>
                         <div className="relative col-span-1 sm:col-span-1">
-                            <label htmlFor="introVideo" className="text-sm font-medium text-gray-600">Intro Video <span className="text-red-600">*</span><span className='' style={{ color: "red" }}>(Only mp4 file max size:100mb)</span></label>
+                            <label htmlFor="introVideo" className="text-sm font-medium text-gray-600">Intro Video <span className="text-red-600">*</span><span className='' style={{ color: "red" }}>(Only mp4 file max size:50mb)</span></label>
                             <input
                                 type="file"
                                 id="introVideo"

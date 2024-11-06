@@ -30,6 +30,7 @@ const HrLoginPage = (props) => {
                     email: response.data.userNAme,
                     token: response.data.jwtToken
                 }));
+                localStorage.setItem("loginTime", new Date().getTime())
                 setLoginDetails({ email: "", password: "" });
                 props.closeFunction();
                 navigate("/");
