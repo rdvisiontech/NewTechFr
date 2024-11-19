@@ -13,6 +13,7 @@ import ApplicantList from './Pages/ApplicantList';
 import Quiz from './Pages/Quiz';
 import ApplicantsScore from './Pages/ApplicantsScore';
 import ViewApplication from './Pages/ViewApplication';
+import AddQuestion from './Pages/AddQuestion';
 
 function App() {
   return (
@@ -31,6 +32,8 @@ function App() {
           <Route exact path="/quiz" element={<Quiz />} />
           <Route exact path="/score" element={<ApplicantsScore/>} />
           <Route exact path="/application/:id" element={<ViewApplication/>} />
+          <Route exact path="/addQuestion" element={<AddQuestion/>} />
+
 
           </Routes>
           <Footer />

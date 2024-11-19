@@ -103,7 +103,7 @@ function Navbar() {
                                 onClick={offDropdown}
                                 to="/"
                                 className={({ isActive }) =>
-                                    `mx-5 my-1 p-2 rounded-lg transition-all duration-300 ease-in-out hover:bg-[#0d4d9d] hover:shadow-lg hover:scale-105 ${isActive
+                                    `mx-5 my-1 p-2 rounded-lg transition-all duration-300 ease-in-out hover:bg-[#5b91d2] hover:shadow-lg hover:scale-105 ${isActive
                                         ? 'bg-[#0d4d9d] text-white'
                                         : ''
                                     }`
@@ -115,7 +115,7 @@ function Navbar() {
                                 <div className="relative">
                                     <button
                                         onClick={toggleDropdown}
-                                        className="mx-5 my-1 w-28 p-2 rounded-lg transition-all duration-300 ease-in-out hover:bg-[#0d4d9d] hover:shadow-lg hover:scale-105 bg-[#0d4d9d] text-white"
+                                        className="mx-5 my-1 w-28 p-2 rounded-lg transition-all duration-300 ease-in-out hover:bg-[#5b91d2] hover:shadow-lg hover:scale-105 bg-[#0d4d9d] text-white"
                                     >
                                         HR utility
                                     </button>
@@ -125,7 +125,7 @@ function Navbar() {
                                                 onClick={offDropdown}
                                                 to="/post"
                                                 className={({ isActive }) =>
-                                                    `text-blue-600 block px-4 py-2 rounded-t-lg transition-all duration-300 ease-in-out hover:bg-[#0d4d9d] hover:text-white ${isActive ? 'bg-[#0d4d9d] text-white' : ''}`
+                                                    `text-blue-600 block px-4 py-2 rounded-t-lg transition-all duration-300 ease-in-out hover:bg-[#5b91d2] hover:text-white ${isActive ? 'bg-[#0d4d9d] text-white' : ''}`
                                                 }
                                             >
                                                 Post New Job
@@ -134,7 +134,7 @@ function Navbar() {
                                                 onClick={offDropdown}
                                                 to="/aplicantList"
                                                 className={({ isActive }) =>
-                                                    `text-blue-600 block px-4 py-2 transition-all duration-300 ease-in-out hover:bg-[#0d4d9d] hover:text-white ${isActive ? 'bg-[#0d4d9d] text-white' : ''}`
+                                                    `text-blue-600 block px-4 py-2 transition-all duration-300 ease-in-out hover:bg-[#5b91d2] hover:text-white ${isActive ? 'bg-[#0d4d9d] text-white' : ''}`
                                                 }
                                             >
                                                 Received Applications
@@ -143,7 +143,7 @@ function Navbar() {
                                                 onClick={offDropdown}
                                                 to="/postedJobs"
                                                 className={({ isActive }) =>
-                                                    `text-blue-600 block px-4 py-2 transition-all duration-300 ease-in-out hover:bg-[#0d4d9d] hover:text-white ${isActive ? 'bg-[#0d4d9d] text-white' : ''}`
+                                                    `text-blue-600 block px-4 py-2 transition-all duration-300 ease-in-out hover:bg-[#5b91d2] hover:text-white ${isActive ? 'bg-[#0d4d9d] text-white' : ''}`
                                                 }
                                             >
                                                 Current Openings
@@ -152,20 +152,30 @@ function Navbar() {
                                                 onClick={offDropdown}
                                                 to="/quiz"
                                                 className={({ isActive }) =>
-                                                    `text-blue-600 block px-4 py-2 transition-all duration-300 ease-in-out hover:bg-[#0d4d9d] hover:text-white ${isActive ? 'bg-[#0d4d9d] text-white' : ''}`
+                                                    `text-blue-600 block px-4 py-2 transition-all duration-300 ease-in-out hover:bg-[#5b91d2] hover:text-white ${isActive ? 'bg-[#0d4d9d] text-white' : ''}`
                                                 }
                                             >
                                                 Quiz
                                             </NavLink>
                                             <NavLink
                                                 onClick={offDropdown}
+                                                to="/addQuestion"
+                                                className={({ isActive }) =>
+                                                    `text-blue-600 block px-4 py-2 transition-all duration-300 ease-in-out hover:bg-[#5b91d2] hover:text-white ${isActive ? 'bg-[#0d4d9d] text-white' : ''}`
+                                                }
+                                            >
+                                                Add Questions
+                                            </NavLink>
+                                            <NavLink
+                                                onClick={offDropdown}
                                                 to="/score"
                                                 className={({ isActive }) =>
-                                                    `text-blue-600 block px-4 py-2 rounded-b-lg transition-all duration-300 ease-in-out hover:bg-[#0d4d9d] hover:text-white ${isActive ? 'bg-[#0d4d9d] text-white' : ''}`
+                                                    `text-blue-600 block px-4 py-2 rounded-b-lg transition-all duration-300 ease-in-out hover:bg-[#5b91d2] hover:text-white ${isActive ? 'bg-[#0d4d9d] text-white' : ''}`
                                                 }
                                             >
                                                 Test Score
                                             </NavLink>
+                                           
                                         </div>
                                     )}
                                 </div>
@@ -174,7 +184,7 @@ function Navbar() {
                                 to="/about"
                                 onClick={offDropdown}
                                 className={({ isActive }) =>
-                                    `mx-5 my-1 p-2 rounded-lg transition-all duration-300 ease-in-out hover:bg-[#0d4d9d] hover:shadow-lg hover:scale-105 ${isActive
+                                    `mx-5 my-1 p-2 rounded-lg transition-all duration-300 ease-in-out hover:bg-[#5b91d2] hover:shadow-lg hover:scale-105 ${isActive
                                         ? 'bg-[#0d4d9d] text-white'
                                         : ''
                                     }`
@@ -186,7 +196,7 @@ function Navbar() {
                                 to="/ourmissions"
                                 onClick={offDropdown}
                                 className={({ isActive }) =>
-                                    `mx-5 my-1 p-2 rounded-lg transition-all duration-300 ease-in-out hover:bg-[#0d4d9d] hover:shadow-lg hover:scale-105 ${isActive
+                                    `mx-5 my-1 p-2 rounded-lg transition-all duration-300 ease-in-out hover:bg-[#5b91d2] hover:shadow-lg hover:scale-105 ${isActive
                                         ? 'bg-[#0d4d9d] text-white'
                                         : ''
                                     }`
@@ -198,7 +208,7 @@ function Navbar() {
                                 to="/workculture"
                                 onClick={offDropdown}
                                 className={({ isActive }) =>
-                                    `mx-5 my-1 p-2 rounded-lg transition-all duration-300 ease-in-out hover:bg-[#0d4d9d] hover:shadow-lg hover:scale-105 ${isActive
+                                    `mx-5 my-1 p-2 rounded-lg transition-all duration-300 ease-in-out hover:bg-[#5b91d2] hover:shadow-lg hover:scale-105 ${isActive
                                         ? 'bg-[#0d4d9d] text-white'
                                         : ''
                                     }`
@@ -210,7 +220,7 @@ function Navbar() {
                                 to="/careers"
                                 onClick={offDropdown}
                                 className={({ isActive }) =>
-                                    `mx-5 my-1 p-2 rounded-lg transition-all duration-300 ease-in-out hover:bg-[#0d4d9d] hover:shadow-lg hover:scale-105 ${isActive
+                                    `mx-5 my-1 p-2 rounded-lg transition-all duration-300 ease-in-out hover:bg-[#5b91d2] hover:shadow-lg hover:scale-105 ${isActive
                                         ? 'bg-[#0d4d9d] text-white'
                                         : ''
                                     }`
@@ -230,7 +240,7 @@ function Navbar() {
                         ) : (
                             <button
                                 onClick={openHrSignInForm}
-                                className={`${localStorage.getItem("loginDetails") ? "bg-[#0d4d9d]" : ""} w-28 font-semibold text-white hover:bg-[#0d4d9d] border-0 py-1 px-4 rounded hover:scale-105 hover:shadow-lg transition-all`}
+                                className={`${localStorage.getItem("loginDetails") ? "bg-[#0d4d9d]" : ""} w-28 font-semibold text-white hover:bg-[#5b91d2] border-0 py-1 px-4 rounded hover:scale-105 hover:shadow-lg transition-all`}
                             >
                                 Hr Login
                             </button>
@@ -280,6 +290,13 @@ function Navbar() {
                                         </NavLink>
                                         <NavLink
                                             onClick={toggleMenu}
+                                            to="/addQuestion"
+                                            className="mb-2 hover:bg-white hover-text-blue-500 transition-all"
+                                        >
+                                            Add Questions
+                                        </NavLink>
+                                        <NavLink
+                                            onClick={toggleMenu}
                                             to="/score"
                                             className="mb-2 hover:bg-white hover-text-blue-500 transition-all"
                                         >
@@ -307,7 +324,7 @@ function Navbar() {
                             ) : (
                                 <button
                                     onClick={openHrSignInForm}
-                                    className="font-semibold text-white hover:bg-[#0d4d9d] border-0 py-1 px-4 rounded hover:scale-105 hover:shadow-lg transition-all"
+                                    className="font-semibold text-white hover:bg-[#5b91d2] border-0 py-1 px-4 rounded hover:scale-105 hover:shadow-lg transition-all"
                                 >
                                     Hr Login
                                 </button>

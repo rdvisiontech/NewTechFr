@@ -17,7 +17,7 @@ const Quiz = () => {
     const { setIsDisabled, url, token } = useAuth()
     const [questions, setQuestions] = useState()
     const [loadingQuestions, setLoadingQuestion] = useState(false)
-    const [roles,setRoles]=useState(["sales","Frontend Developer","Backend Developer","Full Stack Developer"])
+    const [roles, setRoles] = useState([])
     const [responseData, setReaponseData] = useState({
         userName: "",
         email: "",
@@ -25,7 +25,7 @@ const Quiz = () => {
         quizDate: "",
         quizEndTime: "",
         quizStartTime: "",
-       
+
 
 
     })
@@ -38,6 +38,19 @@ const Quiz = () => {
         role: "",
     });
 
+
+    const fetchRoles = async () => {
+        const response = await axios.get(`${url}/role/getRoles`, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+        setRoles(response.data)
+    }
+
+    useEffect(() => {
+        fetchRoles()
+    }, [])
     useEffect(() => {
         fetchQuestionsByRole()
     }, [scoreData.role])
@@ -52,7 +65,9 @@ const Quiz = () => {
                     }
                 })
                 setQuestions(response.data);
-                setLoadingQuestion(false)
+                setTimeout(() => {
+                    setLoadingQuestion(false)
+                }, 3000)
             } catch (error) {
                 console.error("Error fetching questions:", error);
                 setLoadingQuestion(false)
@@ -104,12 +119,12 @@ const Quiz = () => {
                 email: scoreData.email,
                 scoreOfCandidate: scoreData.scoreOfCandidate,
                 quizStartTime: scoreData.quizStartTime,
-                role:scoreData.role,
+                role: scoreData.role,
                 quizEndTime: endTime,
-                correctAnswers:coreectAnswers,
-                incorrectAnswers:incorrectAnswers,
-                skipped:skippedquestions,
-                totalAttempted:coreectAnswers+incorrectAnswers
+                correctAnswers: coreectAnswers,
+                incorrectAnswers: incorrectAnswers,
+                skipped: skippedquestions,
+                totalAttempted: coreectAnswers + incorrectAnswers
 
             },
                 {
@@ -207,6 +222,11 @@ const Quiz = () => {
         return `${minutes}:${secs < 10 ? `0${secs}` : secs}`;
     };
     const timerClass = timer <= 120 ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800';
+    const getRoleNameById = (roleId) => {
+        console.log(roleId)
+        const role = roles.find(role => role.roleId === parseInt(roleId));
+        return role ? role.roleName : "Role not found";
+    };
 
     return (
         <div className="flex flex-col items-center p-8 bg-blue-50 min-h-screen">
@@ -236,10 +256,10 @@ const Quiz = () => {
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg mb-4"
                     >
                         <option value="" disabled>Select your Role</option>
-                        <option value="1">Sales</option>
-                        <option value="2">Forntend Developer</option>
-                        <option value="3">Backend Developer</option>
-                        <option value="4">Full-Stack Developer</option>
+                        {roles.map((role, index) => (
+                            <option key={index} value={role.roleId}>{role.roleName}</option>
+
+                        ))}
 
                     </select>
 
@@ -288,7 +308,32 @@ const Quiz = () => {
                     ) : (
                         <div className="w-full max-w-2xl bg-white shadow-xl rounded-lg p-10 text-center">
                             <h2 className="text-4xl font-extrabold text-gray-800 mb-6">Quiz Results</h2>
+
+                            <div className="flex justify-between items-center mb-8">
+                                <div>
+                                    <h3 className="text-lg font-bold text-gray-500">Points</h3>
+                                    <p className="text-2xl font-extrabold">{score}/{coreectAnswers + incorrectAnswers}</p>
+                                </div>
+                                {/* <div>
+                                <h3 className="text-lg font-bold text-gray-500">Duration</h3>
+                                <p className="text-xl text-gray-800">{quizDuration}</p>
+                            </div> */}
+                                <div className="relative">
+                                    <div className="w-20 h-20 rounded-full border-4 border-gray-200 flex items-center justify-center relative">
+                                        <div
+                                            className="absolute  w-20 h-20 rounded-full border-4 border-green-500"
+                                            style={{ clipPath: 'inset(0 0 20% 0)', transform: `rotate(${score * 3.6}deg)` }}
+                                        />
+                                        <p className="text-lg font-extrabold text-green-600">
+                                            {(score * 100 / questions.length).toFixed(1)}%
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
+
                             <div className="text-left">
+                                {/** User Info Section */}
                                 <div className="mb-6">
                                     <span className="font-bold text-gray-500">User Name:</span>
                                     <span className="ml-3 text-lg text-gray-900">{responseData.userName}</span>
@@ -299,8 +344,9 @@ const Quiz = () => {
                                 </div>
                                 <div className="mb-6">
                                     <span className="font-bold text-gray-500">Selected role:</span>
-                                    <span className="ml-3 text-lg text-gray-900">{roles[scoreData.role-1]}</span>
+                                    <span className="ml-3 text-lg text-gray-900">{getRoleNameById(scoreData.role)}</span>
                                 </div>
+
                                 <div className="mb-6">
                                     <span className="font-bold text-gray-500">Test Start Time:</span>
                                     <span className="ml-3 text-lg text-gray-900">{responseData.quizStartTime}</span>
@@ -309,38 +355,42 @@ const Quiz = () => {
                                     <span className="font-bold text-gray-500">Test End Time:</span>
                                     <span className="ml-3 text-lg text-gray-900">{responseData.quizEndTime}</span>
                                 </div>
-                                <div className="mb-6">
-                                    <span className="font-bold text-gray-500">Total attempted:</span>
-                                    <span className="ml-3 text-lg text-gray-900">{coreectAnswers+incorrectAnswers}</span>
+
+                                {/** Correct/Incorrect/Skipped */}
+                                <div className="grid grid-cols-3 gap-4 my-6">
+                                    <div>
+                                        <span className="font-bold text-gray-500">Correct:</span>
+                                        <p className="text-lg text-green-600">{coreectAnswers}</p>
+                                    </div>
+                                    {/* <div>
+                                    <span className="font-bold text-gray-500">Partially Correct:</span>
+                                    <p className="text-lg text-yellow-600">{partiallyCorrectAnswers}</p>
+                                </div> */}
+                                    <div>
+                                        <span className="font-bold text-gray-500">Incorrect:</span>
+                                        <p className="text-lg text-red-600">{incorrectAnswers}</p>
+                                    </div>
                                 </div>
-                                <div className="mb-6">
-                                    <span className="font-bold text-gray-500">Correct Answers:</span>
-                                    <span className="ml-3 text-lg text-gray-900">{coreectAnswers}</span>
-                                </div>
-                                <div className="mb-6">
-                                    <span className="font-bold text-gray-500">Incorrect Answers:</span>
-                                    <span className="ml-3 text-lg text-gray-900">{incorrectAnswers}</span>
-                                </div>
-                                <div className="mb-6">
-                                    <span className="font-bold text-gray-500">Skipped:</span>
-                                    <span className="ml-3 text-lg text-gray-900">{skippedquestions}</span>
-                                </div>
-                                <div className="mb-6">
-                                    <span className={`text-lg ${score>35?"text-green-900":"text-red-600"} font-bold`}>Your Score:</span>
-                                    <span className={`ml-3 text-lg ${score>35?"text-green-900":"text-red-600"}`}>{score}</span>
-                                </div>
-                                <div className="mb-6">
-                                    <span className="font-bold text-gray-500">Test Status :</span>
-                                    <span className="ml-3 text-lg text-gray-900">Test Submitted</span>
-                                </div>
+
+                                {/* <div className="flex flex-col">
+                                {categories.map((category) => (
+                                    <div className="mb-4" key={category.name}>
+                                        <div className="flex justify-between">
+                                            <span className="text-gray-700 font-bold">{category.name}</span>
+                                            <span className="font-bold">{category.percentage}%</span>
+                                        </div>
+                                        <div className="bg-gray-200 rounded-full h-4">
+                                            <div
+                                                className="h-4 bg-blue-600 rounded-full"
+                                                style={{ width: `${category.percentage}%` }}
+                                            ></div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div> */}
                             </div>
-                            {/* <button
-                            onClick={handleStart}
-                            className="mt-10 py-3 px-6 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition-colors"
-                        >
-                            Restart Quiz
-                        </button> */}
                         </div>
+
 
 
                     )}

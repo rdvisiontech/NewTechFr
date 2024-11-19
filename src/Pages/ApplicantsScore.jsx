@@ -83,7 +83,7 @@ function ApplicantsScore() {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredApplicants.map(applicant => (
+                        {filteredApplicants.slice().reverse().map(applicant => (
                             <tr key={applicant.id} className='bg-blue-50 hover:bg-blue-100'>
                                 <td className="py-3 px-4 border-b text-center">{applicant.userName}</td>
                                 <td className="py-3 px-4 border-b text-center">{applicant.email}</td>
