@@ -273,9 +273,17 @@ const Quiz = () => {
                 </div>
             ) : (
                 <>
-                    <div className={`absolute top-4 right-4 p-4 rounded-lg shadow-md ${timerClass}`}>
+                    <div className={`absolute top-4 right-4 p-4 rounded-lg shadow-md mt-20 ${timerClass}`}>
                         <p className="text-lg font-semibold">Time Left: {formatTime(timer)}</p>
                     </div>
+                    <div className="fixed top-0 left-0 w-full bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 shadow-md flex items-center" role="alert">
+                        <svg className="w-6 h-6 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M12 18h.01M4.5 12C4.5 7.857 7.857 4.5 12 4.5S19.5 7.857 19.5 12 16.143 19.5 12 19.5 4.5 16.143 4.5 12z" />
+                        </svg>
+                        <span className="font-semibold">Info:</span>
+                        <span className="ml-2">Do not refresh the page; otherwise, the quiz will start from the beginning.</span>
+                    </div>
+
                     <div className='text-xl font-semibold'>Number of Questions :- {questions.length}</div>
                     {!showResult ? (
                         <div className="w-full max-w-2xl  shadow-lg rounded-lg p-8 bg-blue-50">
